@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
 
-    public PawnData pawn;
+    public PawnData data;
 
     // Start is called before the first frame update
     void Start()
@@ -22,14 +22,14 @@ public class InputController : MonoBehaviour
         //If the W is pressed -- Add "forward to the direction I am moving
         if (Input.GetKey(KeyCode.W))
         {
-            directionToMove += Vector3.forward;
+            directionToMove += data.tf.forward;
         }
 
         //If S key is down -- Add "reverse" to the direction I am moving
 
         if (Input.GetKey(KeyCode.S))
         {
-            directionToMove += -Vector3.forward;
+            directionToMove += -data.tf.forward;
         }
 
 
