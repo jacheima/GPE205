@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scenes\InputController.cs" />
-    <Compile Include="Assets\Scenes\PawnController.cs" />
+    <Compile Include="Assets\Scenes\PawnData.cs" />
     <Compile Include="Assets\Scenes\PawnMover.cs" />
     <None Include="Assets\kenney_piratekit_1.1\License.txt" />
     <Reference Include="Unity.Timeline.Editor">

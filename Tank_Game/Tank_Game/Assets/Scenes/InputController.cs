@@ -5,14 +5,12 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
 
-    public Transform tf;
-    public Transform p1;
+    public PawnData pawn;
 
     // Start is called before the first frame update
     void Start()
     {
-        tf = GetComponent<Transform>();
-        p1 = GetComponent<Transform>();
+        
     }
 
     // Update is called once per frame
@@ -29,7 +27,10 @@ public class InputController : MonoBehaviour
 
         //If S key is down -- Add "reverse" to the direction I am moving
 
-
+        if (Input.GetKey(KeyCode.S))
+        {
+            directionToMove += -Vector3.forward;
+        }
 
 
         //after i've checked all my inputs, tell my mover to move in the final direction
