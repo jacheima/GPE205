@@ -23,6 +23,7 @@ public class InputController : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             directionToMove += -data.tf.forward;
+            Debug.Log(directionToMove);
         }
 
         //If S key is down -- Add "reverse" to the direction I am moving
@@ -30,13 +31,41 @@ public class InputController : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             directionToMove += data.tf.forward;
+            Debug.Log(directionToMove);
+        }
+
+        //If A key is pressed -- Add rotation to the left
+        if (Input.GetKey(KeyCode.A))
+        {
+            data.mover.Rotate(-data.rotateSpeed * Time.deltaTime);
+        }
+
+        //If D is pressed -- Add rotation to the right
+        if (Input.GetKey(KeyCode.D))
+        {
+            data.mover.Rotate(data.rotateSpeed * Time.deltaTime);
         }
 
         //If Up Arrow is pressed -- Shoot a cannon ball from the front of the ship
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Instantiate(data.cannonball, data.frontCannon.position, data.frontCannon.rotation);
         }
+
+        //If Left Arrow is pressed -- Shoot a cannon ball from the left side of the ship
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Instantiate(data.cannonball, data.leftCannon.position, data.leftCannon.rotation);
+        }
+    
+
+        //If Right Arrow is pressed -- Shoot a cannon ball from the right side of the ship
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Instantiate(data.cannonball, data.rightCannon.position, data.rightCannon.rotation);
+        }
+
+
 
         //after i've checked all my inputs, tell my mover to move in the final direction
 

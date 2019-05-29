@@ -23,8 +23,20 @@ public class PawnMover : MonoBehaviour
 
     public void Move(Vector3 directionToMove)
     {
-        //move
-        cc.SimpleMove(directionToMove * data.moveSpeed);
+        if(directionToMove == -Vector3.forward)
+        {
+            
+            cc.SimpleMove(directionToMove * data.moveSpeed);
+        }
+        else
+        {
+            
+            cc.SimpleMove(directionToMove * data.reverseSpeed);
+        }
+
+
+
+        
     }
 
     public void Rotate(float directionAndSpeed)

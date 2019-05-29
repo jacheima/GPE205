@@ -7,13 +7,16 @@ public class PawnData : MonoBehaviour
     [Header("Components")]
     public Transform tf;
     public PawnMover mover;
+    public InputController ic;
 
     [Header("Variables")]
     public float moveSpeed = 3.0f;
+    public float reverseSpeed = 1.0f;
     public float shotsPerSecond = 1f;
     public float rotateSpeed = 2f;
 
     [Header("Shooting Info")]
+    public cannonBallMover cbm;
     public GameObject cannonball;
     public Transform frontCannon;
     public Transform leftCannon;

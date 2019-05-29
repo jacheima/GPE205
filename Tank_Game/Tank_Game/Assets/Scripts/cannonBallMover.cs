@@ -12,7 +12,7 @@ public class cannonBallMover : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.up * cannonSpeed;
+        rb.velocity = -transform.forward * cannonSpeed;
         Destroy(gameObject, cannonballDestroy);
     }
 
@@ -21,4 +21,7 @@ public class cannonBallMover : MonoBehaviour
     {
         
     }
+
+
+   
 }
