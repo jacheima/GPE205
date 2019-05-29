@@ -22,6 +22,13 @@ public class cannonBallMover : MonoBehaviour
         
     }
 
-
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag.Equals("Enemy"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+    }
    
 }
