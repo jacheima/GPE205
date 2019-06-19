@@ -8,6 +8,7 @@ public class PawnData : MonoBehaviour
     public Transform tf;
     public PawnMover mover;
     public InputController ic;
+    public Transform target;
 
     [Header("Variables")]
     public float moveSpeed = 3.0f;
@@ -22,16 +23,4 @@ public class PawnData : MonoBehaviour
     public Transform leftCannon;
     public Transform rightCannon;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
