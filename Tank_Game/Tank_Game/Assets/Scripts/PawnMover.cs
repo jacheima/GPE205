@@ -23,24 +23,22 @@ public class PawnMover : MonoBehaviour
 
     public void Move(Vector3 directionToMove)
     {
-        if(directionToMove == -Vector3.forward)
-        {
-            
-            cc.SimpleMove(directionToMove * data.moveSpeed);
-        }
-        else
-        {
-            
-            cc.SimpleMove(directionToMove * data.reverseSpeed);
-        }
-
-
-
-        
+        cc.SimpleMove(directionToMove * data.moveSpeed * Time.deltaTime);
     }
 
     public void Rotate(float directionAndSpeed)
     {
         data.tf.Rotate(new Vector3(0f, directionAndSpeed * data.rotateSpeed * Time.deltaTime, 0f));
+    }
+
+    public void RotateTowards(Vector3 dirToTarget)
+    {
+
+        Vector3 targetVector = dirToTarget;
+        Quaternion rotateDirection = Quaternion.LookRotation(targetVector, Vector3.up);
+        rotateDirection.x = 0;
+        rotateDirection.z = 0;
+        data.tf.rotation = Quaternion.RotateTowards(data.tf.rotation, rotateDirection, data.rotateSpeed * Time.deltaTime);
+
     }
 }

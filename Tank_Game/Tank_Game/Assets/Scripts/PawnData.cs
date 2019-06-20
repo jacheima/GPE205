@@ -7,8 +7,8 @@ public class PawnData : MonoBehaviour
     [Header("Components")]
     public Transform tf;
     public PawnMover mover;
-    public InputController ic;
     public Transform target;
+    public FieldOfView fov;
 
     [Header("Variables")]
     public float moveSpeed = 3.0f;
@@ -22,5 +22,7 @@ public class PawnData : MonoBehaviour
     public Transform frontCannon;
     public Transform leftCannon;
     public Transform rightCannon;
+    public int maxCannonRange;
+
 
 }
