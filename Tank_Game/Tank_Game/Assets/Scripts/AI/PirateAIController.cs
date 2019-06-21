@@ -28,6 +28,22 @@ public class PirateAIController : AIController
                 break;
             case AI_STATES.Pursue:
                 Pursue();
+
+                if (Vector3.Distance(transform.position, data.fov.currentTarget.position) < 150f)
+                {
+                    ChangeState(AI_STATES.ReadyToShoot);
+                }
+                break;
+            case AI_STATES.ReadyToShoot:
+                ReadyToShoot();
+
+                if (data.isReadyToShoot == true)
+                {
+                    ChangeState(AI_STATES.Shoot);
+                }
+                break;
+            case AI_STATES.Shoot:
+                Shoot();
                 break;
         }
     }

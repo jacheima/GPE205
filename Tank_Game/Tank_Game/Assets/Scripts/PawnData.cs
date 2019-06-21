@@ -10,10 +10,10 @@ public class PawnData : MonoBehaviour
     public Transform target;
     public FieldOfView fov;
 
-    [Header("Variables")]
+    [Header("Movement")]
     public float moveSpeed = 3.0f;
     public float reverseSpeed = 1.0f;
-    public float shotsPerSecond = 1f;
+
     public float rotateSpeed = 2f;
 
     [Header("Shooting Info")]
@@ -23,6 +23,16 @@ public class PawnData : MonoBehaviour
     public Transform leftCannon;
     public Transform rightCannon;
     public int maxCannonRange;
+    public bool canShootAgian = false;
+    public float shotsPerSecond = 1f;
+    public float cannonTimer = 1;
+
+    [Header("AI Bools")]
+    public bool isReadyToShoot = false;
+    public bool isTurningLeft = false;
+    public bool isTurningRight = false;
+    public bool shootRight = false;
+    public bool shootLeft = false;
 
 
 }

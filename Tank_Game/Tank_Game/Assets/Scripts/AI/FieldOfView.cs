@@ -16,6 +16,8 @@ public class FieldOfView : MonoBehaviour
 
     public bool seesEnemy = false;
 
+    public Transform currentTarget;
+
     void Update()
     {
         CheckIfVisible();
@@ -42,14 +44,18 @@ public class FieldOfView : MonoBehaviour
                 {
                     visibleTargets.Add(target);
                     seesEnemy = true;
+                    currentTarget = visibleTargets[0];
                 }
+
+                
 
             }
         }
 
-
-
     }
+
+
+
 
     public Vector3 AngleToTarget(float angleInDegrees, bool angleIsGlobal)
     {

@@ -21,7 +21,7 @@ public class AIController : MonoBehaviour
 
     public enum AI_STATES
     {
-        Patrol, Search, Pursue, Attack, Flee
+        Patrol, Search, Pursue, ReadyToShoot, Shoot, Flee
     }
 
     void Awake()
@@ -44,6 +44,14 @@ public class AIController : MonoBehaviour
         Vector3 directionToTarget = (target.position - transform.position).normalized;
         data.mover.RotateTowards(directionToTarget);
         data.mover.Move(directionToTarget);
+    }
+
+    public void TurnToShoot(Transform target)
+    {
+        Vector3 directionToTarget = (target.position - transform.position).normalized;
+        data.mover.RotateToShoot(directionToTarget);
+        Debug.Log("Calling Rotate to Shoot");
+        
     }
 
     public void Patrol()
@@ -73,8 +81,23 @@ public class AIController : MonoBehaviour
     public void Pursue()
     {
         //if the ai sees a ship they will pursue it until they are in range to attack
-        Seek(data.fov.visibleTargets[0]);
+        Seek(data.fov.currentTarget);
+
     }
+
+
+    public void ReadyToShoot()
+    {
+        data.shootRight = false;
+        data.shootLeft = false;
+        TurnToShoot(data.fov.currentTarget);
+    }
+
+    public void Shoot()
+    {
+        
+    }
+
 
 
 
