@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine.Utility;
 using UnityEngine;
+using Vuforia;
+using Random = UnityEngine.Random;
 
 public class AIController : MonoBehaviour
 {
@@ -38,12 +40,10 @@ public class AIController : MonoBehaviour
         currentState = newState;
     }
 
-    void Seek(Transform target)
+    void Seek(Vector3 target)
     {
-        Debug.Log("Seeking");
-        Vector3 directionToTarget = (target.position - transform.position).normalized;
-        data.mover.RotateTowards(directionToTarget);
-        data.mover.Move(directionToTarget);
+        data.mover.RotateTowards(target);
+        data.mover.Move(target);
     }
 
     public void TurnToShoot(Transform target)
@@ -56,22 +56,21 @@ public class AIController : MonoBehaviour
 
     public void Patrol()
     {
-        Debug.Log("I was called from the switch statement");
-        Seek(currentPatrolPoint);
+        Vector3 directionToTarget = (currentPatrolPoint.position - transform.position).normalized;
+        Seek(directionToTarget);
 
-        
         if (Vector3.Distance(transform.position, currentPatrolPoint.position) < 5f)
         {
-            Debug.Log("I'm close to the waypoint");
+
             if (currentPatrolIndex + 1 < patrolPoints.Length)
             {
                 currentPatrolIndex++;
-                Debug.Log("I am incrementing the waypoint index");
+
             }
             else
             {
                 currentPatrolIndex = 0;
-                Debug.Log("I am setting the waypoint back to zero");
+
             }
 
             currentPatrolPoint = patrolPoints[currentPatrolIndex];
@@ -81,7 +80,8 @@ public class AIController : MonoBehaviour
     public void Pursue()
     {
         //if the ai sees a ship they will pursue it until they are in range to attack
-        Seek(data.fov.currentTarget);
+        Vector3 directionToTarget = (data.fov.enemyPosition.transform.position - transform.position).normalized;
+        Seek(directionToTarget);
 
     }
 
@@ -95,7 +95,69 @@ public class AIController : MonoBehaviour
 
     public void Shoot()
     {
+        //check if ready to shoot
+        if (data.isReadyToShoot == true)
+        {
+            
+           
+            if (Time.time > stateStartTime + data.coolDown)
+            {
+                data.canShootAgian = true;
+                data.isInCoolDown = false;
+
+                if (data.isInCoolDown == false)
+                {
+                    if (data.shootRight)
+                    {
+                        if (data.canShootAgian)
+                        {
+                            GameObject bullet = Instantiate(data.cannonball, data.rightCannon.position, data.rightCannon.rotation) as GameObject;
+                            cannonBallMover bulletScript = bullet.GetComponent<cannonBallMover>();
+                            if (bulletScript != null)
+                            {
+                                bulletScript.data = data;
+                            }
+                            data.canShootAgian = false;
+                            stateStartTime = Time.time;
+                            data.isInCoolDown = true;
+                        }
+
+                    }
+
+                    if (data.shootLeft)
+                    {
+                        if (data.canShootAgian)
+                        {
+                            GameObject bullet = Instantiate(data.cannonball, data.leftCannon.position, data.leftCannon.rotation) as GameObject;
+                            cannonBallMover bulletScript = bullet.GetComponent<cannonBallMover>();
+                            if (bulletScript != null)
+                            {
+                                bulletScript.data = data;
+                            }
+                            data.canShootAgian = false;
+                            stateStartTime = Time.time;
+                            data.isInCoolDown = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void Search()
+    {
+        Vector3 directionToTarget = (data.fov.enemyPosition.transform.position - transform.position).normalized;
+        Seek(directionToTarget);
+
         
+    }
+
+    public void Flee()
+    {
+        if (data.health == 2)
+        {
+            data.mover.Move(transform.forward);
+        }
     }
 
 

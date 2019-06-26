@@ -7,15 +7,9 @@ public class gameManager : MonoBehaviour
     public GameObject[] Players;
     public GameObject[] Enemies;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void AddDamage(GameObject other)
     {
-        
+        other.gameObject.GetComponentInParent<PawnData>().health--;
     }
 }

@@ -172,6 +172,7 @@
     <Compile Include="Assets\Scripts\AI\PirateAIController.cs" />
     <Compile Include="Assets\Scripts\cannonBallMover.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
+    <Compile Include="Assets\Scripts\LastPlayerSighting.cs" />
     <Compile Include="Assets\Scripts\PawnData.cs" />
     <Compile Include="Assets\Scripts\PawnMover.cs" />
     <None Include="Assets\Art\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using JetBrains.Annotations;
 using UnityEngine;
+using Vuforia;
 
 public class FieldOfView : MonoBehaviour
 {
@@ -17,6 +18,15 @@ public class FieldOfView : MonoBehaviour
     public bool seesEnemy = false;
 
     public Transform currentTarget;
+
+    public Transform lastSighting;
+    public GameObject enemyPosition;
+
+
+    void Start()
+    {
+        
+    }
 
     void Update()
     {
@@ -42,15 +52,30 @@ public class FieldOfView : MonoBehaviour
 
                 if (Physics.Raycast(transform.position, directionToTarget, distanceToTarget, targetMask))
                 {
-                    visibleTargets.Add(target);
-                    seesEnemy = true;
-                    currentTarget = visibleTargets[0];
+                    if (Vector3.Distance(transform.position, target.position) <= viewRadius)
+                    {
+                        visibleTargets.Add(target);
+                        seesEnemy = true;
+                        currentTarget = visibleTargets[0];
+                        enemyPosition.transform.position = currentTarget.position;
+                        //lastSighting = currentTarget;
+                        //lastSighting.position = currentTarget.position;
+                    }
+                    else
+                    {
+                        
+                        visibleTargets.Remove(currentTarget);
+                        //currentTarget = visibleTargets[0];
+                        //currentTarget = null;
+                        seesEnemy = false;
+                    }
                 }
-
-                
-
             }
+
+
+
         }
+
 
     }
 

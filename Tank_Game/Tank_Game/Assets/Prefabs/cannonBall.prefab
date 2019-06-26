@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonSpeed: 60
-  cannonballDestroy: 5
+  cannonballDestroy: 10
 --- !u!54 &5277387005018868405
 Rigidbody:
   m_ObjectHideFlags: 0

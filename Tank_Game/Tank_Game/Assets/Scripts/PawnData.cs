@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PawnData : MonoBehaviour
 {
+    public gameManager gm;
     [Header("Components")]
     public Transform tf;
     public PawnMover mover;
-    public Transform target;
     public FieldOfView fov;
 
     [Header("Movement")]
@@ -22,10 +22,12 @@ public class PawnData : MonoBehaviour
     public Transform frontCannon;
     public Transform leftCannon;
     public Transform rightCannon;
-    public int maxCannonRange;
     public bool canShootAgian = false;
-    public float shotsPerSecond = 1f;
-    public float cannonTimer = 1;
+    public float maxRange = 300f;
+    public float minRange = 50;
+    public float coolDown;
+    public float coolDownMin = 2f;
+    public float coolDownMax = 6f;
 
     [Header("AI Bools")]
     public bool isReadyToShoot = false;
@@ -33,6 +35,9 @@ public class PawnData : MonoBehaviour
     public bool isTurningRight = false;
     public bool shootRight = false;
     public bool shootLeft = false;
+    public bool isInCoolDown = false;
 
+    [Header(("Pirate AI Stats"))]
+    public int health = 4;
 
 }

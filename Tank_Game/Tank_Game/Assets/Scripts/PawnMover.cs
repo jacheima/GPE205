@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Utility;
 
 public class PawnMover : MonoBehaviour
 {
@@ -32,12 +34,15 @@ public class PawnMover : MonoBehaviour
         data.tf.Rotate(new Vector3(0f, directionAndSpeed * data.rotateSpeed * Time.deltaTime, 0f));
     }
 
+    public void Rotate360()
+    {
+        data.tf.Rotate(0f, 360f * data.rotateSpeed * Time.deltaTime, 0f);
+    }
+
 
     public void RotateTowards(Vector3 dirToTarget)
     {
-
-        Vector3 targetVector = dirToTarget;
-        Quaternion rotateDirection = Quaternion.LookRotation(targetVector, Vector3.up);
+        Quaternion rotateDirection = Quaternion.LookRotation(dirToTarget, Vector3.up);
         rotateDirection.x = 0;
         rotateDirection.z = 0;
         data.tf.rotation = Quaternion.RotateTowards(data.tf.rotation, rotateDirection, data.rotateSpeed * Time.deltaTime);
@@ -54,12 +59,9 @@ public class PawnMover : MonoBehaviour
         //float angleToTarget = Vector3.Angle(selfVector, targetVector);
         float angleToTarget = Vector3.SignedAngle(selfVector, targetVector, Vector3.up);
 
-        Debug.Log(angleToTarget);
-        Debug.Log(selfVector);
-        Debug.Log(targetVector);
+        float range = Vector3.Distance(selfVector, targetVector);
 
-
-        if (angleToTarget < data.fov.viewAngle/2)
+        if (angleToTarget < data.fov.viewAngle / 2)
         {
             data.isTurningLeft = true;
 
@@ -93,9 +95,6 @@ public class PawnMover : MonoBehaviour
                 }
             }
         }
-        
-        
-
 
     }
 }
