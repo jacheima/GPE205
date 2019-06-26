@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 339687169}
   - component: {fileID: 339687170}
   m_Layer: 0
-  m_Name: PlayerOneInput
+  m_Name: InputController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4179,6 +4179,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerOne
       objectReference: {fileID: 0}
+    - target: {fileID: 4324787041691755856, guid: 3a0530c439df3e94085e6c3dfaa0459a,
+        type: 3}
+      propertyPath: gm
+      value: 
+      objectReference: {fileID: 384649975}
+    - target: {fileID: 4324787041691755856, guid: 3a0530c439df3e94085e6c3dfaa0459a,
+        type: 3}
+      propertyPath: cbm
+      value: 
+      objectReference: {fileID: 6447512709315648221, guid: 18dee88bdd0b3d7448d85a25c5f97da4,
+        type: 3}
     - target: {fileID: 4324787041691755857, guid: 3a0530c439df3e94085e6c3dfaa0459a,
         type: 3}
       propertyPath: m_LocalPosition.x
