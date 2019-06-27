@@ -26,6 +26,12 @@ public class AIController : MonoBehaviour
         Patrol, Search, Pursue, ReadyToShoot, Shoot, Flee
     }
 
+    public enum AVOID_STATES
+    {
+        TurnToAvoid, MoveToAvoid
+    }
+
+
     void Awake()
     {
         currentPatrolIndex = 0;
@@ -74,7 +80,9 @@ public class AIController : MonoBehaviour
             }
 
             currentPatrolPoint = patrolPoints[currentPatrolIndex];
+            
         }
+
     }
 
     public void Pursue()
@@ -91,6 +99,7 @@ public class AIController : MonoBehaviour
         data.shootRight = false;
         data.shootLeft = false;
         TurnToShoot(data.fov.currentTarget);
+
     }
 
     public void Shoot()
@@ -142,6 +151,8 @@ public class AIController : MonoBehaviour
                 }
             }
         }
+
+        
     }
 
     public void Search()
@@ -149,17 +160,26 @@ public class AIController : MonoBehaviour
         Vector3 directionToTarget = (data.fov.enemyPosition.transform.position - transform.position).normalized;
         Seek(directionToTarget);
 
+     
+
         
     }
 
     public void Flee()
     {
-        if (data.health == 2)
-        {
-            data.mover.Move(transform.forward);
-        }
-    }
+        data.mover.Move(transform.forward);
 
+        
+
+        if (Vector3.Distance(data.tf.position, data.fov.currentTarget.position) > data.fov.viewRadius)
+        {
+            data.health = 3;
+        }
+
+        
+        
+        
+    }
 
 
 

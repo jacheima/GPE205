@@ -37,6 +37,7 @@ public class cannonBallMover : MonoBehaviour
                     data.fov.seesEnemy = false;
                     data.fov.currentTarget = null;
                     Destroy(other.gameObject.transform.parent.gameObject);
+                    Destroy(gameObject);
                 }
                 else
                 {

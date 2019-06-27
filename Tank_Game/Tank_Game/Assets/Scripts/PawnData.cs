@@ -16,6 +16,8 @@ public class PawnData : MonoBehaviour
 
     public float rotateSpeed = 2f;
 
+    
+
     [Header("Shooting Info")]
     public cannonBallMover cbm;
     public GameObject cannonball;
@@ -36,6 +38,7 @@ public class PawnData : MonoBehaviour
     public bool shootRight = false;
     public bool shootLeft = false;
     public bool isInCoolDown = false;
+    public bool shouldFlee = false;
 
     [Header(("Pirate AI Stats"))]
     public int health = 4;

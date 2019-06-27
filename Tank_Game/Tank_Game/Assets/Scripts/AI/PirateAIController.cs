@@ -24,6 +24,11 @@ public class PirateAIController : AIController
                 {
                     ChangeState(AI_STATES.Pursue);
                 }
+
+                if (data.health <= 2)
+                {
+                    ChangeState(AI_STATES.Flee);
+                }
                 break;
             case AI_STATES.Pursue:
                 Pursue();
@@ -31,6 +36,11 @@ public class PirateAIController : AIController
                 if (data.fov.seesEnemy == false && data.fov.currentTarget == null)
                 {
                         ChangeState(AI_STATES.Patrol);
+                }
+
+                if (Time.time > stateStartTime + 6)
+                {
+                    ChangeState(AI_STATES.Patrol);
                 }
 
                 if (data.fov.seesEnemy == false && data.fov.currentTarget != null)
@@ -43,7 +53,11 @@ public class PirateAIController : AIController
                     ChangeState(AI_STATES.ReadyToShoot);
                 }
 
-                
+                if (data.health <= 2)
+                {
+                    ChangeState(AI_STATES.Flee);
+                }
+
                 break;
             case AI_STATES.ReadyToShoot:
                 ReadyToShoot();
@@ -63,6 +77,11 @@ public class PirateAIController : AIController
                     ChangeState(AI_STATES.Search);
                 }
 
+                if (data.health <= 2)
+                {
+                    ChangeState(AI_STATES.Flee);
+                }
+
                 break;
             case AI_STATES.Shoot:
                 data.coolDown = Random.Range(data.coolDownMin, data.coolDownMax);
@@ -76,6 +95,11 @@ public class PirateAIController : AIController
                 {
                     ChangeState(AI_STATES.Search);
                 }
+
+                if (data.health <= 2)
+                {
+                    ChangeState(AI_STATES.Flee);
+                }
                 break;
             case AI_STATES.Search:
                 Search();
@@ -88,11 +112,21 @@ public class PirateAIController : AIController
                 {
                     ChangeState(AI_STATES.Pursue);
                 }
+
+                if (data.health <= 2)
+                {
+                    ChangeState(AI_STATES.Flee);
+                }
                 break;
             case AI_STATES.Flee:
                 Flee();
 
-                if (Time.time > stateStartTime + 5)
+                if (data.health > 2)
+                {
+                    ChangeState(AI_STATES.Patrol);
+                }
+
+                if (data.fov.seesEnemy == false && data.fov.currentTarget == null)
                 {
                     ChangeState(AI_STATES.Patrol);
                 }
